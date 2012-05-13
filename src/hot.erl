@@ -27,7 +27,19 @@
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% @version 0.2.0
--module(hot).
+
+-define(module, hot).
+
+% BEGIN POSE PACKAGE PATTERN
+-ifndef(package).
+-module(?module).
+-package(default).
+-else.
+-module(?package.?module).
+-package(?package).
+-endif.
+% END POSE PACKAGE PATTERN
+
 -version("0.2.0").
 
 %%
