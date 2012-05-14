@@ -64,7 +64,7 @@
 
 %% @doc Run hotswap as pose command.
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
-run(IO, ARG, ENV) -> hotswap_run(IO, ignore_param).
+run(IO, _ARG, _ENV) -> hotswap_run(IO, ignore_param).
 
 %%
 %% Local Functions
