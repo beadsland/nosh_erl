@@ -26,7 +26,7 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.2.0
+%% @version 0.2.1
 
 -define(module, hot).
 
@@ -40,7 +40,7 @@
 -endif.
 % END POSE PACKAGE PATTERN
 
--version("0.2.0").
+-version("0.2.1").
 
 %%
 %% Include files
@@ -56,14 +56,14 @@
 %% Exported Functions
 %%
 
--export([run/1]).
+-export([run/3]).
 
 %%
 %% API Functions
 %%
 
 %% @doc Run hotswap as pose command.
--spec run(IO :: #std{}) -> no_return().
+-spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
 run(IO) -> hotswap_run(IO, ignore_param).
 
 %%
