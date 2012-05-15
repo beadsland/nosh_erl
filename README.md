@@ -14,6 +14,8 @@ __References__
 Erlang Shell](http://www.erlang.org/doc/man/shell.html) module documentation for Erl shell command set.
 * See also [The
 Erlang Emulator](http://www.erlang.org/doc/man/erl.html) module documentation for Erl shell invocation.
+* This is a subproject of the
+[`nosh`](http://github.com/beadsland/nosh) application.
 
 
 This is the Erl shell alternative command set for the[`nosh`](http://github.com/beadsland/nosh) project.When complete, this sub-project will supply a complete set of[`pose`](http://github.com/beadsland/pose)-compatible
