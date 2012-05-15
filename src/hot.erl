@@ -22,7 +22,23 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc Hotswap current application.
+%% @reference This command makes use of the `pose_code' module of the
+%% <a href="http://github.com/beadsland/pose">POSIX-like interface
+%% emulation</a>.
+%% @end
+%% @doc Hotswap current application.  This command module affords the
+%% ability to hotswap the modules of the currently active application.
+%%
+%% When run from the <a href="http://github.com/beadsland/nosh">`nosh'</a>
+%% commandline, `hot' attempts to compile and load any `nosh' modules
+%% which changed source files.  Old module code is purged, current module
+%% code is made old, and the newly compiled binaries are made current.
+%%
+%% Developers wishing to make use of this functionality are advised to
+%% make all calls to `loop/*' and other recursively iterative functions
+%% fully qualified (<i>i.e.</i>, `?MODULE:loop(...)') so as to protect
+%% active processes from being killed for lingering in old code.
+%% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
@@ -62,8 +78,8 @@
 %% API Functions
 %%
 
-%% @doc Run hotswap as pose command.
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
+%% @doc Run hotswap as pose command.
 run(IO, _ARG, _ENV) -> hotswap_run(IO, ignore_param).
 
 %%
