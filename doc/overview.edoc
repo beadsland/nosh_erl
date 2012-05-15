@@ -1,0 +1,21 @@
+% Headers don't work in overview.edoc file, so we include everything from
+% a header file.
+%
+% This has the added advantage that Eclipse knows how to syntax-check
+% .hrl files...
+
+@author Beads D. Land-Trujillo [http://twitter.com/beadsland]
+@copyright 2012 Beads D. Land-Trujillo
+@version 0.0.1
+@title Welcome to the `nosh' Erl shell alternative command set (nosh_erl)
+@headerfile "../src/overview.hrl"
+
+@reference See <a href="http://www.erlang.org/doc/man/shell.html">The
+Erlang Shell</a> module documentation for Erl shell command set.
+@end
+@reference See also <a href="http://www.erlang.org/doc/man/erl.html">The
+Erlang Emulator</a> module documentation for Erl shell invocation.
+@end
+@reference This is a subproject of the
+<a href="http://github.com/beadsland/nosh">`nosh'</a> application.
+@end
