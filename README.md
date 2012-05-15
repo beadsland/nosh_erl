@@ -18,5 +18,5 @@ Erlang Emulator](http://www.erlang.org/doc/man/erl.html) module documentation fo
 [`nosh`](http://github.com/beadsland/nosh) application.
 
 
-This is the Erl shell alternative command set for the[`nosh`](http://github.com/beadsland/nosh) project.When complete, this sub-project will supply a complete set of[`pose`](http://github.com/beadsland/pose)-compatible
+This is the Erl shell alternative command set for the[`nosh`](http://github.com/beadsland/nosh) project.When finished, this sub-project will supply a complete set of[`pose`](http://github.com/beadsland/pose)-compatible
   command modules for running Erl shell commands in Bourne shell syntax.

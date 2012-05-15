@@ -25,7 +25,7 @@
 %% @doc This is the Erl shell alternative command set for the
 %% <a href="http://github.com/beadsland/nosh">`nosh'</a> project.
 %%
-%% When complete, this sub-project will supply a complete set of
+%% When finished, this sub-project will supply a complete set of
 %% <a href="http://github.com/beadsland/pose">`pose'</a>-compatible
 %% command modules for running Erl shell commands in Bourne shell syntax.
 %% @end
