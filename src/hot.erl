@@ -83,15 +83,18 @@
 run(IO, _ARG, _ENV) ->
   ?INIT_POSE,
   ?STDOUT("Hotswapping nosh modules\n"),
-  pose_command:load(noterm),
-  pose_command:load(nosh),
-  pose_command:load(pose),
-  pose_command:load(safe),
+  do_hot(IO, [noterm, nosh, safe, pose]),
   exit(ok).
 
 %%
 %% Local Functions
 %%
 
-
-
+do_hot(_IO, []) -> ok;
+do_hot(IO, [Head | Tail]) ->
+  case pose_command:load(Head) of
+    {error, What, Warnings}     -> pose:load_warn(IO, Head, Warnings),
+                                   ?STDERR("~s~n", ?FORMAT_ERLERR(What));
+    {module, _Module, Warnings} -> pose:load_warn(IO, Head, Warnings),
+                                   do_hot(IO, Tail)
+  end.
