@@ -80,13 +80,7 @@
 
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
 %% @doc Run hotswap as pose command.
-run(IO, _ARG, _ENV) -> hotswap_run(IO, ignore_param).
-
-%%
-%% Local Functions
-%%
-
-hotswap_run(IO, _Line) ->
+run(IO, _ARG, _ENV) -> 
   ?INIT_POSE,
   ?STDOUT("Hotswapping nosh modules\n"),
   pose_command:load(noterm),
@@ -94,4 +88,10 @@ hotswap_run(IO, _Line) ->
   pose_command:load(pose),
   pose_command:load(safe),
   exit(ok).
+  
+%%
+%% Local Functions
+%%
+
+
 
