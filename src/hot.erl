@@ -65,7 +65,7 @@
 -define(debug, true).
 -include("pose/include/interface.hrl").
 
--import(pose_code).
+-import(pose_command).
 -import(re).
 
 %%
@@ -80,7 +80,7 @@
 
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
 %% @doc Run hotswap as pose command.
-run(IO, _ARG, _ENV) -> 
+run(IO, _ARG, _ENV) ->
   ?INIT_POSE,
   ?STDOUT("Hotswapping nosh modules\n"),
   pose_command:load(noterm),
@@ -88,7 +88,7 @@ run(IO, _ARG, _ENV) ->
   pose_command:load(pose),
   pose_command:load(safe),
   exit(ok).
-  
+
 %%
 %% Local Functions
 %%
