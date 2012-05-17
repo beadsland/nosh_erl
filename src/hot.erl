@@ -89,26 +89,9 @@ run(IO, _ARG, _ENV) -> hotswap_run(IO, ignore_param).
 hotswap_run(IO, _Line) ->
   ?INIT_POSE,
   ?STDOUT("Hotswapping nosh modules\n"),
-  hotswap(IO, noterm),
-  hotswap(IO, nosh),
-  hotswap_nosh(IO, code:all_loaded()),
+  pose_command:load(noterm),
+  pose_command:load(nosh),
+  pose_command:load(pose),
+  pose_command:load(safe),
   exit(ok).
 
-hotswap_nosh(_IO, []) -> ok;
-hotswap_nosh(IO, [{Module, _Path} | Tail]) ->
-  {ok, MP} = re:compile("^nosh_"),
-  case re:run(atom_to_list(Module), MP, [{capture, none}]) of
-    match   -> ?DEBUG("see ~p~n", [Module]),
-               hotswap(IO, Module);
-    nomatch -> true
-  end,
-  hotswap_nosh(IO, Tail).
-
-% @todo refactor this given new pose_code implementation
-hotswap(IO, Module) ->
-  try
-    pose_code:load(Module)
-  catch
-    {Error, Detail} ->
-        ?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail])
-  end.
