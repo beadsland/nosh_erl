@@ -65,8 +65,8 @@
 -define(debug, true).
 -include("pose/include/interface.hrl").
 
+-import(pose).
 -import(pose_command).
--import(re).
 
 %%
 %% Exported Functions
@@ -85,7 +85,7 @@ run(IO, _ARG, _ENV) ->
   ?STDOUT("Hotswapping nosh modules\n"),
   Status = do_hot(IO, [noterm, nosh, safe, pose]),
   exit(Status).
-  
+
 %%
 %% Local Functions
 %%
