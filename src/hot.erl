@@ -42,7 +42,7 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.2.1
+%% @version 0.2.2
 
 -define(module, hot).
 
