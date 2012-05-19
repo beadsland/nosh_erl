@@ -81,7 +81,8 @@ start(Line) ->
 run(IO, ARG, _ENV) ->
   ?INIT_POSE,
   ?DEBUG("Bang!\n"),
-  Line = strings:join([ARG#arg.cmd | ARG#arg.v], " "),
+  Words = [atom_to_list(X) || X <- ARG#arg.v],
+  Line = string:join(Words, " "),
   Timeout = 1000 * 60 * 5,
   Status = do_bang(IO, Line, Timeout),
   exit(Status).
