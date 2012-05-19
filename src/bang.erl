@@ -61,13 +61,15 @@
 -export([start/1, run/3]).
 
 % hidden
--export([bang_loop/3, loop/2]).
+-export([bang_loop/3]).
+
+-export([loop/2]).
 
 %%
 %% API Functions
 %%
 
--type bang_error() :: failed_open_port | {exit, any()}.
+-type bang_error() :: {error, any()} | {exit, any()}.
 -type bang_status() :: ok | {status, integer()}.
 -spec start([atom()]) -> bang_status() | bang_error().
 %% @doc Start bang as a blocking function.
@@ -95,10 +97,16 @@ run(IO, ARG, _ENV) ->
 do_bang(IO, Command, Timeout) ->
   ?INIT_POSE,
   Opts = [stderr_to_stdout, exit_status, {line, 500}],
-  Port = erlang:open_port({spawn, Command}, Opts),
-  if is_port(Port)  -> ?MODULE:bang_loop(IO, Port, Timeout);
-     true           -> exit(failed_open_port)
+  case catch erlang:open_port({spawn, Command}, Opts) of
+    {'EXIT', Reason}    -> ?DEBUG("port error\n"),
+                           {error, Reason};
+    Port                -> ?MODULE:bang_loop(IO, Port, Timeout)
   end.
+
+% @hidden Exported for spawn.
+%port(Command, Opts) ->
+%  Port = erlang:open_port({spawn, Command}, Opts),
+%  exit({port, Port}).
 
 % @hidden Exported for fully qualified calls.
 bang_loop(IO, Port, Timeout) ->
@@ -125,12 +133,14 @@ bang_loop(IO, Port, Timeout) ->
 % @hidden Export to allow for hotswap.
 loop(IO, RunPid) ->
   receive
-    {purging, _Pid, _Mod}       -> ?MODULE:loop(IO, RunPid);
-    {'EXIT', RunPid, Reason}    -> Reason;
-    {MsgTag, RunPid, Line}      -> do_output(MsgTag, Line),
-                                   ?MODULE:loop(IO, RunPid);
-    Noise                       -> do_noise(Noise),
-                                   ?MODULE:loop(IO, RunPid)
+    {purging, _Pid, _Mod}           -> ?MODULE:loop(IO, RunPid);
+    {'EXIT', RunPid, ok}            -> ok;
+    {'EXIT', RunPid, {ok, What}}    -> do_output(erlout, What);
+    {'EXIT', RunPid, Reason}        -> do_output(erlerr, Reason);
+    {MsgTag, RunPid, Line}          -> do_output(MsgTag, Line),
+                                       ?MODULE:loop(IO, RunPid);
+    Noise                           -> do_noise(Noise),
+                                       ?MODULE:loop(IO, RunPid)
   end.
 
 % Handle stderr and stdout messages.
