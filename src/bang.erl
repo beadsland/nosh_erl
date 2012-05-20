@@ -49,7 +49,7 @@
 -define(debug, true).
 -include("pose/include/interface.hrl").
 
--import(strings).
+-import(string).
 -import(erlang).
 -import(io).
 
