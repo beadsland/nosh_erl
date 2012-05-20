@@ -26,7 +26,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 
 
-<pre>bang_error() = failed_open_port | {exit, any()}</pre>
+<pre>bang_error() = {error, any()} | {exit, any()}</pre>
 
 
 

@@ -104,11 +104,6 @@ do_bang(IO, Command, Timeout) ->
     Port                -> ?MODULE:bang_loop(IO, Port, Timeout)
   end.
 
-% @hidden Exported for spawn.
-%port(Command, Opts) ->
-%  Port = erlang:open_port({spawn, Command}, Opts),
-%  exit({port, Port}).
-
 % @hidden Exported for fully qualified calls.
 bang_loop(IO, Port, Timeout) ->
   receive
