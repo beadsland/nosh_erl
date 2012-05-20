@@ -11,7 +11,9 @@ Hotswap current application.
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.2.2
+__Version:__ 0.2.3
+
+__Behaviours:__ [`gen_command`](gen_command.md).
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
@@ -42,7 +44,7 @@ active processes from being killed for lingering in old code.<a name="index"></a
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#run-3">run/3</a></td><td>Run hotswap as pose command.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#run-3">run/3</a></td><td></td></tr><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Equivalent to <a href="#start-1"><tt>start([])</tt></a>.</td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start as a blocking function.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -58,4 +60,22 @@ active processes from being killed for lingering in old code.<a name="index"></a
 <br></br>
 
 
-Run hotswap as pose command.
+<a name="start-0"></a>
+
+###start/0##
+
+
+<pre>start() -&gt; no_return()</pre>
+<br></br>
+
+
+Equivalent to [`start([])`](#start-1).<a name="start-1"></a>
+
+###start/1##
+
+
+<pre>start(Param::[atom()]) -&gt; no_return()</pre>
+<br></br>
+
+
+Start as a blocking function.

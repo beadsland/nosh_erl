@@ -42,7 +42,7 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.2.2
+%% @version 0.2.3
 
 -define(module, hot).
 
@@ -56,7 +56,7 @@
 -endif.
 % END POSE PACKAGE PATTERN
 
--version("0.2.2").
+-version("0.2.3").
 
 %%
 %% Include files
@@ -65,6 +65,7 @@
 -define(debug, true).
 -include("pose/include/interface.hrl").
 
+-import(gen_command).
 -import(pose).
 -import(pose_command).
 
@@ -72,16 +73,36 @@
 %% Exported Functions
 %%
 
--export([run/3]).
+-behaviour(gen_command).
+
+% API entry points
+-export([start/0, start/1, run/3]).
+
+% Hidden callbacks
+-export([do_run/2]).
 
 %%
 %% API Functions
 %%
 
+-spec start() -> no_return().
+%% @equiv start([])
+start() -> start([]).
+
+-spec start(Param :: [atom()]) -> no_return().
+%% @doc Start as a blocking function.
+start(Param) -> gen_command:start(Param, ?MODULE).
+
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
-%% @doc Run hotswap as pose command.
-run(IO, _ARG, ENV) ->
-  ?INIT_POSE,
+%% doc Start as a `pose' command.
+run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
+
+%%
+%% Callback Functions
+%%
+
+%% @hidden Callback entry point for gen_command behaviour.
+do_run(IO, _ARG) ->
   ?STDOUT("Hotswapping nosh modules\n"),
   Status = do_hot(IO, [noterm, nosh, safe, pose]),
   exit(Status).
