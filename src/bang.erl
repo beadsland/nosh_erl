@@ -95,6 +95,7 @@ run(IO, ARG, ENV) ->
 
 %% @todo write stderr to file and tail same
 do_bang(IO, Command, Timeout) ->
+  ENV = ?ENV,
   ?INIT_POSE,
   Opts = [stderr_to_stdout, exit_status, {line, 500}],
   case catch erlang:open_port({spawn, Command}, Opts) of
