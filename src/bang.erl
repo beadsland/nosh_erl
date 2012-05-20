@@ -26,7 +26,7 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.2.0
+%% @version 0.2.1
 
 -define(module, bang).
 
@@ -40,7 +40,7 @@
 -endif.
 % END POSE PACKAGE PATTERN
 
--version("0.2.0").
+-version("0.2.1").
 
 %%
 %% Include files
@@ -49,39 +49,47 @@
 -define(debug, true).
 -include("pose/include/interface.hrl").
 
+-import(gen_command).
 -import(string).
 -import(erlang).
--import(io).
 
 %%
 %% Exported Functions
 %%
 
-% API export
--export([start/1, run/3]).
+-behaviour(gen_command).
 
-% hidden
--export([bang_loop/3]).
+% API entry points
+-export([start/0, start/1, run/3]).
 
--export([loop/2]).
+% Hidden callbacks
+-export([do_run/2]).
+
+% Hidden fully-qualified loop
+-export([loop/3]).
 
 %%
 %% API Functions
 %%
 
--type bang_error() :: {error, any()} | {exit, any()}.
--type bang_status() :: ok | {status, integer()}.
--spec start([atom()]) -> bang_status() | bang_error().
-%% @doc Start bang as a blocking function.
-start(Line) ->
-  IO = ?IO(self()),
-  RunPid = spawn_link(?MODULE, run, [IO, ?ARG(?MODULE, Line), ?ENV]),
-  ?MODULE:loop(IO, RunPid).
+-spec start() -> no_return().
+%% @equiv start([])
+start() -> start([]).
+
+-spec start(Param :: [atom()]) -> no_return().
+%% @doc Start as a blocking function.
+start(Param) -> gen_command:start(Param, ?MODULE).
 
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
-%% @doc Run an OS command as a pose command.
-run(IO, ARG, ENV) ->
-  ?INIT_POSE,
+%% doc Start as a `pose' command.
+run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
+
+%%
+%% Callback Functions
+%%
+
+%% @hidden Callback entry point for gen_command behaviour.
+do_run(IO, ARG) ->
   ?DEBUG("Bang!\n"),
   Words = [atom_to_list(X) || X <- ARG#arg.v],
   Line = string:join(Words, " "),
@@ -101,55 +109,23 @@ do_bang(IO, Command, Timeout) ->
   case catch erlang:open_port({spawn, Command}, Opts) of
     {'EXIT', Reason}    -> ?DEBUG("port error\n"),
                            {error, Reason};
-    Port                -> ?MODULE:bang_loop(IO, Port, Timeout)
+    Port                -> ?MODULE:loop(IO, Port, Timeout)
   end.
 
 % @hidden Exported for fully qualified calls.
-bang_loop(IO, Port, Timeout) ->
+loop(IO, Port, Timeout) ->
   receive
     {Port, {data, {eol, Line}}}     -> ?STDOUT("~s~n", [Line]),
-                                       ?MODULE:bang_loop(IO, Port, Timeout);
+                                       ?MODULE:loop(IO, Port, Timeout);
     {Port, {data, {noeol, Line}}}   -> ?STDOUT("~s", [Line]),
-                                       ?MODULE:bang_loop(IO, Port, Timeout);
+                                       ?MODULE:loop(IO, Port, Timeout);
     {Port, {exit_status, 0}}        -> exit(ok);
     {Port, {exit_status, Status}}   -> exit({status, Status});
     {'EXIT', Port, normal}          -> exit(ok);
     {'EXIT', Port, Reason}          -> exit({exit, Reason});
     Noise                           -> ?STDERR("noise: ~p ~p~n",
                                                [Noise, self()]),
-                                       ?MODULE:bang_loop(IO, Port, Timeout)
+                                       ?MODULE:loop(IO, Port, Timeout)
   after Timeout ->
       exit(timeout)
   end.
-
-%%%
-% Start loop
-%%%
-
-% @hidden Export to allow for hotswap.
-loop(IO, RunPid) ->
-  receive
-    {purging, _Pid, _Mod}           -> ?MODULE:loop(IO, RunPid);
-    {'EXIT', RunPid, ok}            -> ok;
-    {'EXIT', RunPid, {ok, What}}    -> do_output(erlout, What);
-    {'EXIT', RunPid, Reason}        -> do_output(erlerr, Reason);
-    {MsgTag, RunPid, Line}          -> do_output(MsgTag, Line),
-                                       ?MODULE:loop(IO, RunPid);
-    Noise                           -> do_noise(Noise),
-                                       ?MODULE:loop(IO, RunPid)
-  end.
-
-% Handle stderr and stdout messages.
-do_output(MsgTag, Output) ->
-  case MsgTag of
-    stdout  -> io:format("~s", [Output]);
-    erlout  -> io:format("~p: data: ~p~n", [?MODULE, Output]);
-    erlerr  -> Erlerr = ?FORMAT_ERLERR(Output),
-               io:format(standard_error, "** ~s~n", [Erlerr]);
-    stderr  -> io:format(standard_error, "** ~s", [Output]);
-    debug   -> io:format(standard_error, "-- ~s", [Output])
-  end.
-
-% Handle message queue noise.
-do_noise(Noise) ->
-  io:format(standard_error, "noise: ~p ~p~n", [Noise, self()]).

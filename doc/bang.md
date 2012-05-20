@@ -3,7 +3,6 @@
 #Module ?module#
 
 * [Description](#description)
-* [Data Types](#types)
 * [Function Index](#index)
 * [Function Details](#functions)
 
@@ -12,35 +11,16 @@ Run underlying OS subshell command as a `pose` command.
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.2.0
+__Version:__ 0.2.1
 
-__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
-<a name="types"></a>
+__Behaviours:__ [`gen_command`](gen_command.md).
 
-##Data Types##
-
-
-
-
-###<a name="type-bang_error">bang_error()</a>##
-
-
-
-<pre>bang_error() = {error, any()} | {exit, any()}</pre>
-
-
-
-###<a name="type-bang_status">bang_status()</a>##
-
-
-
-<pre>bang_status() = ok | {status, integer()}</pre>
-<a name="index"></a>
+__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="index"></a>
 
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#run-3">run/3</a></td><td>Run an OS command as a pose command.</td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start bang as a blocking function.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#run-3">run/3</a></td><td></td></tr><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Equivalent to <a href="#start-1"><tt>start([])</tt></a>.</td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start as a blocking function.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -56,13 +36,22 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 <br></br>
 
 
-Run an OS command as a pose command.<a name="start-1"></a>
+<a name="start-0"></a>
+
+###start/0##
+
+
+<pre>start() -&gt; no_return()</pre>
+<br></br>
+
+
+Equivalent to [`start([])`](#start-1).<a name="start-1"></a>
 
 ###start/1##
 
 
-<pre>start(Line::[atom()]) -> <a href="#type-bang_status">bang_status()</a> | <a href="#type-bang_error">bang_error()</a></pre>
+<pre>start(Param::[atom()]) -&gt; no_return()</pre>
 <br></br>
 
 
-Start bang as a blocking function.
+Start as a blocking function.
