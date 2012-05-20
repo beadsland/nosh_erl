@@ -80,7 +80,7 @@
 
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
 %% @doc Run hotswap as pose command.
-run(IO, _ARG, _ENV) ->
+run(IO, _ARG, ENV) ->
   ?INIT_POSE,
   ?STDOUT("Hotswapping nosh modules\n"),
   Status = do_hot(IO, [noterm, nosh, safe, pose]),
