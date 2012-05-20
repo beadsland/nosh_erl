@@ -80,7 +80,7 @@ start(Line) ->
 
 -spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
 %% @doc Run an OS command as a pose command.
-run(IO, ARG, _ENV) ->
+run(IO, ARG, ENV) ->
   ?INIT_POSE,
   ?DEBUG("Bang!\n"),
   Words = [atom_to_list(X) || X <- ARG#arg.v],
