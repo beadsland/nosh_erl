@@ -106,10 +106,11 @@ do_bang(IO, Command, Timeout) ->
   ENV = ?ENV,
   ?INIT_POSE,
   Opts = [stderr_to_stdout, exit_status, {line, 500}],
-  case catch erlang:open_port({spawn, Command}, Opts) of
-    {'EXIT', Reason}    -> ?DEBUG("port error\n"),
-                           {error, Reason};
-    Port                -> ?MODULE:loop(IO, Port, Timeout)
+  try erlang:open_port({spawn, Command}, Opts) of
+    Port            -> ?MODULE:loop(IO, Port, Timeout)
+  catch
+    error:Reason    -> ?DEBUG("port error\n"),
+                       {error, Reason}
   end.
 
 % @hidden Exported for fully qualified calls.
