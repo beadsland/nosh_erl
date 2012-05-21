@@ -114,12 +114,8 @@ do_run(IO, _ARG) ->
 
 do_hot(_IO, []) -> ok;
 do_hot(IO, [Head | Tail]) ->
-  case pose_command:load(Head) of
-    {error, What, Warnings}     ->
-      pose:send_load_warnings(IO, Head, Warnings),
-      ?STDERR("~s~n", ?FORMAT_ERLERR(What)),
-      {error, What};
-    {module, _Module, Warnings} ->
-      pose:send_load_warnings(IO, Head, Warnings),
-      do_hot(IO, Tail)
+  case gen_command:load_command(IO, Head) of
+    {module, _Module}   -> do_hot(IO, Tail);
+    {error, What}       -> ?STDERR("~s~n", ?FORMAT_ERLERR(What)), 
+                           {error, What}
   end.
