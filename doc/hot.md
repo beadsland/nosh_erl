@@ -1,7 +1,6 @@
 
 
 #Module ?module#
-
 * [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
@@ -17,8 +16,7 @@ __Behaviours:__ [`gen_command`](gen_command.md).
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__References__
-* This command makes use of the `pose_code` module of the
+__References__* This command makes use of the `pose_code` module of the
 [POSIX-like interface
 emulation](http://github.com/beadsland/pose).
 <a name="description"></a>
@@ -56,7 +54,7 @@ active processes from being killed for lingering in old code.<a name="index"></a
 ###run/3##
 
 
-<pre>run(IO::#std{}, ARG::#arg{}, ENV::#env{}) -&gt; no_return()</pre>
+	run(IO::#std{}, ARG::#arg{}, ENV::#env{}) -&gt; no_return()
 <br></br>
 
 
@@ -65,7 +63,7 @@ active processes from being killed for lingering in old code.<a name="index"></a
 ###start/0##
 
 
-<pre>start() -&gt; no_return()</pre>
+	start() -&gt; no_return()
 <br></br>
 
 
@@ -74,7 +72,7 @@ Equivalent to [`start([])`](#start-1).<a name="start-1"></a>
 ###start/1##
 
 
-<pre>start(Param::[atom()]) -&gt; no_return()</pre>
+	start(Param::[atom()]) -&gt; no_return()
 <br></br>
 
 
