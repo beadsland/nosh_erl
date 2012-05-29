@@ -124,7 +124,7 @@ loop(IO, Port, Timeout) ->
     {Port, {exit_status, Status}}   -> exit({status, Status});
     {'EXIT', Port, normal}          -> exit(ok);
     {'EXIT', Port, Reason}          -> exit({exit, Reason});
-    Noise                           -> ?STDERR("noise: ~p ~p~n",
+    Noise                           -> ?DEBUG("noise: ~p ~p~n",
                                                [Noise, self()]),
                                        ?MODULE:loop(IO, Port, Timeout)
   after Timeout ->
