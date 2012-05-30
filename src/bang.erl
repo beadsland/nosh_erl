@@ -62,10 +62,10 @@
 % API entry points
 -export([start/0, start/1, run/3]).
 
-% Hidden callbacks
+% Private callbacks
 -export([do_run/2]).
 
-% Hidden fully-qualified loop
+% Private fully-qualified loop
 -export([loop/3]).
 
 %%
@@ -88,7 +88,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %% Callback Functions
 %%
 
-%% @hidden Callback entry point for gen_command behaviour.
+%% @private Callback entry point for gen_command behaviour.
 do_run(IO, ARG) ->
   ?DEBUG("Bang!\n"),
   Words = [atom_to_list(X) || X <- ARG#arg.v],
@@ -113,7 +113,7 @@ do_bang(IO, Command, Timeout) ->
                        {error, Reason}
   end.
 
-% @hidden Exported for fully qualified calls.
+% @private Exported for fully qualified calls.
 loop(IO, Port, Timeout) ->
   receive
     {Port, {data, {eol, Line}}}     -> ?STDOUT("~s~n", [Line]),

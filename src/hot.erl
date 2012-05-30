@@ -78,7 +78,7 @@
 % API entry points
 -export([start/0, start/1, run/3]).
 
-% Hidden callbacks
+% private callbacks
 -export([do_run/2]).
 
 %%
@@ -101,7 +101,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %% Callback Functions
 %%
 
-%% @hidden Callback entry point for gen_command behaviour.
+%% @private Callback entry point for gen_command behaviour.
 %% @todo make hotswap list env derived
 do_run(IO, _ARG) ->
   ?STDOUT("Hotswapping nosh modules\n"),
@@ -116,6 +116,6 @@ do_hot(_IO, []) -> ok;
 do_hot(IO, [Head | Tail]) ->
   case gen_command:load_command(IO, Head) of
     {module, _Module}   -> do_hot(IO, Tail);
-    {error, What}       -> ?STDERR("~s~n", ?FORMAT_ERLERR(What)), 
+    {error, What}       -> ?STDERR("~s~n", ?FORMAT_ERLERR(What)),
                            {error, What}
   end.
