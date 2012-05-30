@@ -6,7 +6,7 @@
 %%
 %%======================================
 
-{application, erl,
+{application, nosh_erl,
  [
   {description, ""},
   {vsn, "1"},
@@ -15,6 +15,6 @@
                   kernel,
                   stdlib
                  ]},
-  {mod, { erl_app, []}},
+  {mod, { nosh_erl_app, []}},
   {env, []}
  ]}.
