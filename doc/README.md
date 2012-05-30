@@ -23,3 +23,11 @@ This is the Erl shell alternative command set for the
 When finished, this sub-project will supply a complete set of
 [`pose`](http://github.com/beadsland/pose)-compatible
   command modules for running Erl shell commands in Bourne shell syntax.
+
+##Modules##
+
+
+<table width="100%" border="0" summary="list of modules">
+<tr><td><a href="bang.md" class="module">bang</a></td></tr>
+<tr><td><a href="hot.md" class="module">hot</a></td></tr></table>
+

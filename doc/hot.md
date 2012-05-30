@@ -1,7 +1,8 @@
 
 
-#Module ?module#
+#Module hot#
 * [Description](#description)
+* [Data Types](#types)
 * [Function Index](#index)
 * [Function Details](#functions)
 
@@ -37,7 +38,20 @@ code is made old, and the newly compiled binaries are made current.
 Developers wishing to make use of this functionality are advised to
 make all calls to `loop/*` and other recursively iterative functions
 fully qualified (_i.e._, `?MODULE:loop(...)`) so as to protect
-active processes from being killed for lingering in old code.<a name="index"></a>
+active processes from being killed for lingering in old code.
+<a name="types"></a>
+
+##Data Types##
+
+
+
+
+###<a name="type-env_prop">env_prop()</a>##
+
+
+
+	env_prop() = atom() | {atom(), string()}
+<a name="index"></a>
 
 ##Function Index##
 
@@ -54,7 +68,7 @@ active processes from being killed for lingering in old code.<a name="index"></a
 ###run/3##
 
 
-	run(IO::#std{}, ARG::#arg{}, ENV::#env{}) -&gt; no_return()
+	run(IO::#std{in = pid(), out = pid(), err = pid(), echo = boolean()}, ARG::#arg{cmd = atom(), v = list()}, ENV::#env{plist = [<a href="#type-env_prop">env_prop()</a>]}) -> no_return()
 <br></br>
 
 
