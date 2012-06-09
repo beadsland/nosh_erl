@@ -104,8 +104,9 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %% @private Callback entry point for gen_command behaviour.
 %% @todo make hotswap list env derived
 do_run(IO, _ARG) ->
-  ?STDOUT("Hotswapping nosh modules\n"),
-  Status = do_hot(IO, [noterm, nosh, pose]),
+  ?STDOUT("Hotswapping core commands\n"),
+  Status = do_hot(IO, [charin, folderl, keyin, noterm, 
+                       nosh, pose, gen_command]),
   exit(Status).
 
 %%
