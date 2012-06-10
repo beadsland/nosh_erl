@@ -117,6 +117,6 @@ do_hot(_IO, []) -> ok;
 do_hot(IO, [Head | Tail]) ->
   case gen_command:load_command(IO, Head) of
     {module, _Module}   -> do_hot(IO, Tail);
-    {error, What}       -> ?STDERR("~s~n", ?FORMAT_ERLERR(What)),
+    {error, What}       -> ?STDERR("~s~n", [?FORMAT_ERLERR(What)]),
                            {error, What}
   end.
