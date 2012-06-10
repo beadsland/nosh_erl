@@ -105,8 +105,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %% @todo make hotswap list env derived
 do_run(IO, _ARG) ->
   ?STDOUT("Hotswapping core commands\n"),
-  Status = do_hot(IO, [charin, folderl, keyin, noterm, 
-                       nosh, pose, gen_command]),
+  Status = do_hot(IO, [folderl, noterm, nosh, pose, gen_command]),
   exit(Status).
 
 %%
