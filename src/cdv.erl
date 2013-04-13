@@ -27,8 +27,8 @@
 %% emulation</a>.
 %% @end
 %% @reference The <a href="http://www.erlang.org/doc/man/crashdump_viewer.html">
-%% crashdump_viewer</a> application is a Web-based tool for reviewing Erlang
-%% <code>erl_crash.dump</code> files.
+%% crashdump_viewer</a> module of the <code>observer</code> application is a 
+%% Web-based tool for reviewing Erlang <code>erl_crash.dump</code> files.
 %% @end
 %% @doc Launch <code>crashdump_viewer</code> application.
 %% @end
@@ -61,6 +61,7 @@
 -import(gen_command).
 -import(pose).
 -import(pose_command).
+-import(crashdump_viewer).
 
 %%
 %% Exported Functions
@@ -95,7 +96,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %%
 
 %% @private Callback entry point for gen_command behaviour.
-%% @todo capture crashdump console output
+%% @todo capture console output (re localhost:8888)
 do_run(IO, _ARG) ->
   ?STDOUT("Launching crashdump_viewer\n"),
   Status = crashdump_viewer:start(),
