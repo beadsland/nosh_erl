@@ -33,7 +33,7 @@
 %% @doc Launch <code>crashdump_viewer</code> application.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
-%% @copyright 2012 Beads D. Land-Trujillo
+%% @copyright 2013 Beads D. Land-Trujillo
 
 %% @version 0.0.1
 
