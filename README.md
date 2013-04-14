@@ -29,5 +29,6 @@ When finished, this sub-project will supply a complete set of
 
 <table width="100%" border="0" summary="list of modules">
 <tr><td><a href="http://github.com/beadsland/nosh_bin/blob/master/doc/bang.md" class="module">bang</a></td></tr>
+<tr><td><a href="http://github.com/beadsland/nosh_bin/blob/master/doc/cdv.md" class="module">cdv</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh_bin/blob/master/doc/hot.md" class="module">hot</a></td></tr></table>
 
