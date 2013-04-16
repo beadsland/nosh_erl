@@ -9,7 +9,7 @@
 
 Launch `crashdump_viewer` application.
 
-Copyright (c) 2012 Beads D. Land-Trujillo
+Copyright (c) 2013 Beads D. Land-Trujillo
 
 __Version:__ 0.0.1
 
