@@ -60,8 +60,6 @@
 -include_lib("pose/include/interface.hrl").
 
 -import(gen_command).
--import(pose).
--import(pose_command).
 -import(crashdump_viewer).
 
 %%
