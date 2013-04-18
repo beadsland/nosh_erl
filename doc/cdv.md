@@ -20,8 +20,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __References__* This command makes use of the `pose_code` module of the
 [POSIX-like interface
 emulation](http://github.com/beadsland/pose).
-* The [
-crashdump_viewer](http://www.erlang.org/doc/man/crashdump_viewer.html) module of the `observer` application is a
+* The
+[
+`crashdump_viewer`](http://www.erlang.org/doc/man/crashdump_viewer.html) module of the `observer` application is a
 Web-based tool for reviewing Erlang `erl_crash.dump` files.
 
 <a name="types"></a>

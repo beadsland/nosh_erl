@@ -26,11 +26,12 @@
 %% <a href="http://github.com/beadsland/pose">POSIX-like interface
 %% emulation</a>.
 %% @end
-%% @reference The <a href="http://www.erlang.org/doc/man/crashdump_viewer.html">
-%% crashdump_viewer</a> module of the <code>observer</code> application is a 
-%% Web-based tool for reviewing Erlang <code>erl_crash.dump</code> files.
+%% @reference The 
+%% <a href="http://www.erlang.org/doc/man/crashdump_viewer.html">
+%% `crashdump_viewer'</a> module of the `observer' application is a 
+%% Web-based tool for reviewing Erlang `erl_crash.dump' files.
 %% @end
-%% @doc Launch <code>crashdump_viewer</code> application.
+%% @doc Launch `crashdump_viewer' application.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2013 Beads D. Land-Trujillo
