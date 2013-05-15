@@ -59,8 +59,12 @@
 %-define(debug, true).
 -include_lib("pose/include/interface.hrl").
 
+% BEGIN POSE PACKAGE IMPORTS
+-ifdef(package).
 -import(gen_command).
 -import(crashdump_viewer).
+-endif.
+% END POSE PACKAGE IMPORTS
 
 %%
 %% Exported Functions
