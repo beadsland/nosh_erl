@@ -18,13 +18,13 @@
 %% by brackets replaced by your own identifying information:
 %% "Portions Copyright [year] [name of copyright owner]"
 %%
-%% Copyright 2012 Beads D. Land-Trujillo.  All Rights Reserved
+%% Copyright 2012, 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
 %% @doc Run underlying OS subshell command as a `pose' command.
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
-%% @copyright 2012 Beads D. Land-Trujillo
+%% @copyright 2012, 2013 Beads D. Land-Trujillo
 
 %% @version 0.2.1
 
@@ -48,14 +48,6 @@
 
 %-define(debug, true).
 -include_lib("pose/include/interface.hrl").
-
-% BEGIN POSE PACKAGE IMPORTS
--ifdef(package).
--import(gen_command).
--import(string).
--import(erlang).
--endif.
-% END POSE PACKAGE IMPORTS
 
 %%
 %% Exported Functions
